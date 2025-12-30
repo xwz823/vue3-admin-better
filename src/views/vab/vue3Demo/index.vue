@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <template #header>
         <div class="card-header">
-          <h3>Vue 3 setup 语法糖示例</h3>
+          <h3>测试</h3>
         </div>
       </template>
       <div>
@@ -37,9 +37,9 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from "vue";
-import { ElMessage } from "element-plus";
 import dayjs from "dayjs";
+import { ElMessage } from "element-plus";
+import { computed, reactive, ref } from "vue";
 
 // 响应式变量
 const count = ref(0);

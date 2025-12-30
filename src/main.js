@@ -1,9 +1,9 @@
+import store from "@/store"; // 导入Vuex store
+import { printLayoutsInfo } from "@/utils/printInfo";
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "@/store"; // 导入Vuex store
 import plugins from "./plugins";
-import { printLayoutsInfo } from "@/utils/printInfo";
+import router from "./router";
 // 导入布局组件注册函数
 import { registerLayoutComponents } from "@/layouts/export";
 // 导入事件总线
@@ -31,7 +31,7 @@ plugins(app);
 
 // 注册所有布局组件
 registerLayoutComponents(app);
-
+console.log(app);
 // 添加事件总线到全局属性
 app.config.globalProperties.$eventBus = eventBus;
 
