@@ -2,8 +2,6 @@
 import "./support";
 import "@/styles/vab.scss";
 import "@/config/permission";
-// 不再导入vab-icon
-import VabPermissions from "layouts/Permissions";
 import Vab from "@/utils/vab";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -42,5 +40,4 @@ export default (app) => {
 
   // 注册自定义插件
   app.use(Vab);
-  app.use(VabPermissions);
 };

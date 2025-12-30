@@ -6,11 +6,11 @@ process.noDeprecation = true;
 const { rspack } = require("@rspack/core");
 const path = require("path");
 const fs = require("fs");
-// 引入layouts中的donationConsole函数
-const { donationConsole } = require("./layouts");
 
-// 在命令行控制台打印信息
-donationConsole();
+// 打印项目信息
+console.log('\x1b[32m%s\x1b[0m', '> Vue3 Admin Better - 学习版本');
+console.log('\x1b[36m%s\x1b[0m', '> 适合学习 Vue 3 和 ES6+ 的后台管理系统模板');
+console.log('');
 
 const configPath = path.resolve(__dirname, "rspack.config.js");
 const config = require(configPath);

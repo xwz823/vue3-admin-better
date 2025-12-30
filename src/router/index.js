@@ -196,24 +196,6 @@ export const asyncRoutes = [
         },
       },
       {
-        path: "settings",
-        name: "Settings",
-        component: () => import("@/views/vab/settings.vue"),
-        meta: {
-          title: "系统设置",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "notification",
-        name: "Notification",
-        component: () => import("@/views/vab/notification.vue"),
-        meta: {
-          title: "通知中心",
-          permissions: ["admin"],
-        },
-      },
-      {
         path: "calendar",
         name: "Calendar",
         component: () => import("@/views/vab/calendar.vue"),
@@ -222,144 +204,9 @@ export const asyncRoutes = [
           permissions: ["admin"],
         },
       },
-      {
-        path: "task",
-        name: "Task",
-        component: () => import("@/views/vab/task.vue"),
-        meta: {
-          title: "任务管理",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "statistics",
-        name: "Statistics",
-        component: () => import("@/views/vab/statistics.vue"),
-        meta: {
-          title: "数据统计",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "help",
-        name: "Help",
-        component: () => import("@/views/vab/help.vue"),
-        meta: {
-          title: "帮助中心",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "project",
-        name: "Project",
-        component: () => import("@/views/vab/project.vue"),
-        meta: {
-          title: "项目管理",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "team",
-        name: "Team",
-        component: () => import("@/views/vab/team.vue"),
-        meta: {
-          title: "团队管理",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "workflow",
-        name: "Workflow",
-        component: () => import("@/views/vab/workflow.vue"),
-        meta: {
-          title: "工作流",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "knowledge",
-        name: "Knowledge",
-        component: () => import("@/views/vab/knowledge.vue"),
-        meta: {
-          title: "知识库",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "customer",
-        name: "Customer",
-        component: () => import("@/views/vab/customer.vue"),
-        meta: {
-          title: "客户管理",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "product",
-        name: "Product",
-        component: () => import("@/views/vab/product.vue"),
-        meta: {
-          title: "产品管理",
-          permissions: ["admin"],
-        },
-      },
-      {
-        path: "order",
-        name: "Order",
-        component: () => import("@/views/vab/order.vue"),
-        meta: {
-          title: "订单管理",
-          permissions: ["admin"],
-        },
-      },
-      // {
-      //   path: "campaign",
-      //   name: "Campaign",
-      //   component: () => import("@/views/vab/campaign.vue"),
-      //   meta: {
-      //     title: "营销活动",
-      //     permissions: ["admin"],
-      //   },
-      // },
     ],
   },
 
-  {
-    path: "/external-store",
-    component: Layout,
-    meta: {
-      title: "",
-      icon: "",
-    },
-    children: [
-      {
-        path: "https://vuejs-core.cn/store",
-        meta: {
-          title: "模板市场",
-          target: "_blank",
-          icon: "box-open",
-        },
-      },
-    ],
-  },
-  {
-    path: "/external-job",
-    component: Layout,
-    meta: {
-      title: "",
-      icon: "",
-    },
-    children: [
-      {
-        path: "https://job.vuejs-core.cn/posts",
-        meta: {
-          title: "找工作",
-          target: "_blank",
-          icon: "horse-head",
-        },
-      },
-    ],
-  },
   {
     path: "/error",
     component: EmptyLayout,
@@ -378,25 +225,6 @@ export const asyncRoutes = [
         name: "Error404",
         component: () => import("@/views/404"),
         meta: { title: "404" },
-      },
-    ],
-  },
-    {
-    path: '/donate-menu',
-    component: Layout,
-    meta: {
-      title: '支持我们',
-      icon: 'heart',
-    },
-    children: [
-      {
-        path: '/donate',
-        component: () => import('@/views/donate/index'),
-        meta: {
-          title: '支持我们',
-          icon: 'heart',
-          badge: 'Donate',
-        },
       },
     ],
   },

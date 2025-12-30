@@ -1,18 +1,15 @@
 {
   "name": "vue3-admin-better",
   "version": "3.0.1",
-  "author": "zxwk1998",
+  "author": "xwz",
   "participants": [],
   "homepage": "https://vuejs-core.cn",
   "scripts": {
+    "dev": "node --no-deprecation rspack.js serve",
     "serve:rspack": "node --no-deprecation rspack.js serve",
     "build": "rimraf dist && node --no-deprecation rspack.js build",
-    "build:zip": "rimraf dist && node --no-deprecation rspack.js build && node build-zip.cjs",
-    "print-info": "node -e \"require('./layouts').donationConsole()\"",
-    "clear": "rimraf node_modules&&npm install  --registry=--registry=https://registry.npmmirror.com",
-    "update": "ncu -u --reject chalk,sass,sass-loader --registry=https://registry.npmmirror.com&&pnpm i --no-frozen-lockfile",
-    "module:update": "ncu -u --reject chalk,sass,sass-loader --registry=https://registry.npmmirror.com&&pnpm i --no-frozen-lockfile",
-    "push": "start ./push.sh"
+    "clear": "rimraf node_modules&&npm install  --registry=https://registry.npmmirror.com",
+    "update": "ncu -u --reject chalk,sass,sass-loader --registry=https://registry.npmmirror.com&&pnpm i --no-frozen-lockfile"
   },
   "repository": {
     "type": "git",
@@ -36,7 +33,6 @@
     "echarts": "6.0.0",
     "element-plus": "^2.13.0",
     "jsencrypt": "^3.5.4",
-    "layouts": "file:layouts",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.22",
     "mitt": "^3.0.1",
@@ -57,7 +53,6 @@
     "@rspack/core": "^1.6.8",
     "@rspack/dev-server": "^1.1.4",
     "@vue/compiler-sfc": "^3.5.26",
-    "archiver": "^7.0.1",
     "babel-loader": "^10.0.0",
     "body-parser": "^2.2.1",
     "chalk": "4.1.2",
