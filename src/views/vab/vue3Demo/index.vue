@@ -1,9 +1,9 @@
 <template>
   <div class="vue3-demo-container">
     <el-card class="box-card">
-      <template #header>
+      <template #header >
         <div class="card-header">
-          <h3>测试</h3>
+          <h3>测试1</h3>
         </div>
       </template>
       <div>

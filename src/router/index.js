@@ -3,10 +3,10 @@
  * @description router全局配置，如有必要可分文件抽离，其中asyncRoutes只有在intelligence模式下才会用到，vip文档中已提供路由的基础图标与小清新图标的配置方案，请仔细阅读
  */
 
-import { createRouter, createWebHashHistory } from "vue-router";
-import Layout from "@/layouts/index.vue";
-import EmptyLayout from "@/layouts/EmptyLayout.vue";
 import { publicPath } from "@/config";
+import EmptyLayout from "@/layouts/EmptyLayout.vue";
+import Layout from "@/layouts/index.vue";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 export const constantRoutes = [
   {
@@ -78,6 +78,37 @@ export const asyncRoutes = [
     alwaysShow: true,
     meta: { title: "组件", icon: "box-open", defaultOpen: true },
     children: [
+      {
+        path: "custom",
+        name: "Custom",
+        meta: {
+          title: "自定义模块",
+          permissions: ["admin"],
+        },
+        children: [
+          {
+            path: "demo",
+            name: "Demo",
+            meta: { title: "测试模块" },
+            children: [
+              {
+                path: "demo1",
+                component: () => import("@/views/vab/custom/demo/demo1.vue"),
+                name: "Demo1",
+                meta: { title: "1单元" },
+                children: []
+              },
+              {
+                path: "demo2",
+                component: () => import("@/views/vab/custom/demo/demo2.vue"),
+                name: "Demo2",
+                meta: { title: "2单元" },
+                children: []
+              },
+            ],
+          },
+        ],
+      },
       {
         path: "vue3Demo",
         name: "Vue3Demo",
