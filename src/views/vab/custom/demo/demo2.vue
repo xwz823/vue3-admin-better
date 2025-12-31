@@ -12,14 +12,15 @@
             <span class="last-line">深度:<strong>{{ item.depth }}</strong> km </span>
           </div>
         </div>
-        <div class="left-box-magnitude">
+        <div class="left-box-magnitude" :style="`align-items:${index === 0 ? 'flex-end' : 'center'}`">
           <span>M<strong
               :style="index === 0 ? 'font-size: 30px; font-weight: 200;' : 'font-size: 25px; font-weight: bold;'">{{
                 item.magnitude }}</strong></span>
         </div>
       </div>
-      <div class="right-box">
-        <p>{{ item.alertLevel }}</p>
+      <div class="right-box"
+        :style="`background-color: ${alertLevelColorMap.get(item.alertLevel)};font-size:${index === 0 ? '70px' : '40px'}`">
+        {{ item.alertLevel }}
       </div>
     </div>
   </el-card>
@@ -27,27 +28,26 @@
 
 
 <script setup>
-import { ref } from 'vue';
-const data = ref([{
-  id: 1,
-  "time": "04/14 18:37",
-  "status": "正式测定",
-  "location": "印尼爪哇岛",
-  "depth": "600",
-  "magnitude": "5.7",
-  "alertLevel": 3,
-  "color": "blue"
-},
-{
-  id: 2,
-  "time": "04/14 17:55",
-  "status": "深源",
-  "location": "印尼爪哇岛",
-  "depth": "",
-  "magnitude": "7.1",
-  "alertLevel": 3,
-  "color": "blue"
-}]);
+import { getLocationList } from '@/api/demo';
+import { onMounted, ref } from 'vue';
+
+const alertLevelColorMap = ref(new Map([
+  [3, 'blue'],
+  [4, 'green'],
+  [5, 'yellow'],
+  [6, 'orange'],
+  [7, 'red'],
+  [8, 'gray'],
+  [9, 'white']
+]));
+onMounted(() => {
+  getLocationList().then(res => {
+    console.log(res);
+    data.value = res.data;
+  });
+});
+
+const data = ref([]);
 </script>
 
 <style lang="scss" scoped>
@@ -81,7 +81,7 @@ const data = ref([{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
   }
 
   .row-box {
@@ -110,8 +110,9 @@ const data = ref([{
     }
 
     .left-box-magnitude {
-      position: relative;
-      display: inline;
+      height: 100%;
+      display: flex;
+      align-items: center;
     }
 
     .right-box {

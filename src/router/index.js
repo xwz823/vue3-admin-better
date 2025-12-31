@@ -98,13 +98,20 @@ export const asyncRoutes = [
                 meta: { title: "1单元" },
                 children: []
               },
-              {
-                path: "demo2",
-                component: () => import("@/views/vab/custom/demo/demo2.vue"),
-                name: "Demo2",
-                meta: { title: "2单元" },
-                children: []
-              },
+                {
+                  path: "demo2",
+                  component: () => import("@/views/vab/custom/demo/demo2.vue"),
+                  name: "Demo2",
+                  meta: { title: "2单元" },
+                  children: []
+                },
+                {
+                  path: "demo3",
+                  component: () => import("@/views/vab/custom/demo/demo3.vue"),
+                  name: "Demo3",
+                  meta: { title: "3单元" },
+                  children: []
+                },
             ],
           },
         ],

@@ -1,22 +1,21 @@
-import axios from "axios";
 import {
-  baseURL,
-  contentType,
-  debounce,
-  invalidCode,
-  loginInterception,
-  noPermissionCode,
-  requestTimeout,
-  successCode,
-  tokenName,
+    baseURL,
+    contentType,
+    debounce,
+    invalidCode,
+    loginInterception,
+    noPermissionCode,
+    requestTimeout,
+    successCode,
+    tokenName,
 } from "@/config";
-import store from "@/store";
-import qs from "qs";
 import router from "@/router";
+import store from "@/store";
 import { isArray } from "@/utils/validate";
+import axios from "axios";
 import { ElLoading, ElMessage } from "element-plus";
-import { pickBy, identity } from "lodash-es";
-import { mock } from "mockjs";
+import { identity, pickBy } from "lodash-es";
+import qs from "qs";
 
 // 在生产环境下引入mock数据
 if (process.env.NODE_ENV === "production") {

@@ -97,6 +97,8 @@ const add = () => {
     title: title.value,
     quantity: quantity.value
   })
+  title.value = '';
+  quantity.value = '';
 }
 const resetList = () => {
   console.log(cloneList);
