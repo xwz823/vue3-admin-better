@@ -1,4 +1,9 @@
 <template>
+    <el-form :model="form" label-width="120px">
+        <el-form-item label="Name">
+            <el-input v-model="form.name" />
+        </el-form-item>
+    </el-form>
     <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="date" label="Date" width="180" />
         <el-table-column prop="name" label="Name" width="180" />
@@ -7,10 +12,29 @@
 </template>
 
 <script setup>
-import { getQuarkResourceList } from '@/api/demo';
-import { onMounted, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
 
-const tableData = ref([]);
+const form = reactive({});
+const name = ref('');
+
+watch(
+    form,
+  (newVal, oldVal) => {
+    console.log('旧值:', oldVal);
+    console.log('新值:', newVal);
+  }
+);
+/* const tableData = computed(() => {
+  console.log(form);
+  console.log(name.value);
+  // 必须返回一个值，且要在 return 中使用响应式变量才能触发更新
+  return [
+    { date: '2024-01-01', name: form.name || 'Default', address: 'Address 1' },
+    { date: '2024-01-02', name: name.value || 'Default', address: 'Address 2' }
+  ];
+}); */
+
+/* const tableData = ref([]);
 const data = ref({
     "kw": "凡人修仙传",
     "cloud_types":["quark"]
@@ -18,11 +42,11 @@ const data = ref({
 
 onMounted(() => {
     console.log(data.value);
-    getQuarkResourceList(data.value).then(res => {
+    getQuarkResourceList(data.value).then(res => { 
         console.log(res);
         tableData.value = res.data;
     });
-});
+}); */
 </script>
 
 
