@@ -263,6 +263,30 @@ module.exports = {
     open: {
       target: [`http://localhost:${devPort || 8091}`],
     },
+    proxy: [
+      {
+        context: ['/pansou-api'],
+        target: 'https://www.xuwz999.top',
+        changeOrigin: true,
+        secure: false,
+        pathRewrite: {
+          '^/pansou-api': '/pansou/api'
+        },
+        timeout: 60000,
+        proxyTimeout: 60000,
+        logLevel: 'debug',
+        onProxyReq: (proxyReq, req, res) => {
+          console.log('[代理] 转发请求:', req.method, 'https://www.xuwz999.top' + req.url.replace('/pansou-api', '/pansou/api'));
+          console.log('[代理] 请求体长度:', proxyReq.getHeader('content-length'));
+        },
+        onProxyRes: (proxyRes, req, res) => {
+          console.log('[代理] 收到响应:', proxyRes.statusCode, req.url);
+        },
+        onError: (err, req, res) => {
+          console.error('[代理] 错误:', err.message);
+        }
+      }
+    ],
     setupMiddlewares: (middlewares, devServer) => {
       if (!devServer) {
         throw new Error("dev-server is not defined");

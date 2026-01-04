@@ -1,13 +1,13 @@
 import {
-    baseURL,
-    contentType,
-    debounce,
-    invalidCode,
-    loginInterception,
-    noPermissionCode,
-    requestTimeout,
-    successCode,
-    tokenName,
+  baseURL,
+  contentType,
+  debounce,
+  invalidCode,
+  loginInterception,
+  noPermissionCode,
+  requestTimeout,
+  successCode,
+  tokenName,
 } from "@/config";
 import router from "@/router";
 import store from "@/store";
@@ -78,18 +78,38 @@ instance.defaults.retryDelay = retryConfig.retryDelay;
 // 请求拦截器
 instance.interceptors.request.use(
   (config) => {
-    if (store.state.user.accessToken) {
+    // 判断是否是第三方接口（以http或https开头的完整URL）
+    const isThirdPartyApi = /^https?:\/\//.test(config.url);
+    
+    // 判断是否是代理接口（以 /pansou-api 开头）
+    const isProxyApi = /^\/pansou-api/.test(config.url);
+    
+    // 如果是代理接口，清空 baseURL，避免拼接 /vab-mock-server
+    if (isProxyApi) {
+      config.baseURL = '';
+      console.log('🔄 代理接口请求:', config.url);
+      console.log('请求方法:', config.method);
+      console.log('请求参数:', config.data);
+      console.log('请求头:', config.headers);
+    }
+    
+    // 只有非第三方接口才添加accessToken
+    if (!isThirdPartyApi && !isProxyApi && store.state.user.accessToken) {
       config.headers[tokenName] = store.state.user.accessToken;
     }
 
-    //这里会过滤所有为空、0、false的key，如果不需要请自行注释
-    if (config.data) config.data = pickBy(config.data, identity);
-    if (
-      config.data &&
-      config.headers["Content-Type"] ===
-        "application/x-www-form-urlencoded;charset=UTF-8"
-    )
-      config.data = qs.stringify(config.data);
+    // 只对非代理接口过滤空值（代理接口保持原始数据）
+    if (!isProxyApi) {
+      //这里会过滤所有为空、0、false的key，如果不需要请自行注释
+      if (config.data) config.data = pickBy(config.data, identity);
+      if (
+        config.data &&
+        config.headers["Content-Type"] ===
+          "application/x-www-form-urlencoded;charset=UTF-8"
+      )
+        config.data = qs.stringify(config.data);
+    }
+    
     if (debounce.some((item) => config.url.includes(item)))
       loadingInstance = ElLoading.service();
 
@@ -106,6 +126,10 @@ instance.interceptors.response.use(
     if (loadingInstance) loadingInstance.close();
 
     const { data, config } = response;
+
+    // 添加成功响应日志
+    console.log('✅ 请求成功:', config.url);
+    console.log('响应数据:', data);
 
     // 判断data是否为undefined或null
     if (data === undefined || data === null) {
@@ -138,6 +162,15 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (loadingInstance) loadingInstance.close();
+
+    // 添加详细的错误日志
+    console.error('=== 请求错误详情 ===');
+    console.error('错误对象:', error);
+    console.error('请求配置:', error.config);
+    console.error('响应数据:', error.response);
+    console.error('错误信息:', error.message);
+    console.error('错误状态码:', error.response?.status);
+    console.error('==================');
 
     // 处理请求重试
     const { config } = error;

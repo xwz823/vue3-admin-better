@@ -9,7 +9,7 @@ export function getLocationList(data) {
 
 export function getQuarkResourceList(data) {
   return request({
-    url: 'https://www.xuwz999.top/pansou/api/search',
+    url: '/pansou-api/search',
     method: 'post',
     data
   })
