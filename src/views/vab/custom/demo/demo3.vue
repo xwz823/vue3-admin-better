@@ -1,29 +1,37 @@
 <template>
-    <el-form :model="form" label-width="120px">
-        <el-form-item label="Name">
-            <el-input v-model="form.name" />
-        </el-form-item>
-    </el-form>
-    <el-table :data="tableData" style="width: 100%">
-        <el-table-column prop="date" label="Date" width="180" />
-        <el-table-column prop="name" label="Name" width="180" />
-        <el-table-column prop="address" label="Address" />
-    </el-table>
+  <div ref="container">1</div>
+  <el-form :model="form" label-width="120px">
+    <el-form-item label="Name">
+      <el-input v-model="form.name" />
+    </el-form-item>
+  </el-form>
+  <el-button @click="handleClick">点击</el-button>
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" />
+    <el-table-column prop="name" label="Name" width="180" />
+    <el-table-column prop="address" label="Address" />
+  </el-table>
 </template>
 
 <script setup>
-import { reactive, ref, watch } from 'vue';
+import { reactive, ref, useTemplateRef, watch } from 'vue';
 
 const form = reactive({});
 const name = ref('');
 
 watch(
-    form,
+  form,
   (newVal, oldVal) => {
     console.log('旧值:', oldVal);
     console.log('新值:', newVal);
   }
 );
+
+const container = useTemplateRef('container');
+const handleClick = () => {
+  container.value.style.backgroundColor = 'blue';
+};
+
 /* const tableData = computed(() => {
   console.log(form);
   console.log(name.value);

@@ -14,3 +14,10 @@ export function getQuarkResourceList(data) {
     data
   })
 }
+
+export function getWeatherList(data) {
+  return request({
+    url: 'https://api.open-meteo.com/v1/forecast?latitude=39.9042&longitude=116.4074&current=temperature,weather_code,wind_speed_10m&timezone=auto',
+    method: 'get'
+  })
+}

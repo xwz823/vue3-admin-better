@@ -147,7 +147,8 @@ instance.interceptors.response.use(
       : [...[successCode]];
 
     // 是否操作正常
-    if (code !== null && codeVerificationArray.includes(code)) {
+    return data;
+    /* if (code !== null && codeVerificationArray.includes(code)) {
       return data;
     } else {
       handleCode(code, msg);
@@ -158,7 +159,7 @@ instance.interceptors.response.use(
           msg,
         })}` || "Error"
       );
-    }
+    } */
   },
   (error) => {
     if (loadingInstance) loadingInstance.close();

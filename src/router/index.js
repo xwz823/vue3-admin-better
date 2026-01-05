@@ -112,6 +112,27 @@ export const asyncRoutes = [
                   meta: { title: "3单元" },
                   children: []
                 },
+                {
+                  path: "demo4",
+                  component: () => import("@/views/vab/custom/demo/demo4.vue"),
+                  name: "Demo4",
+                  meta: { title: "4单元" },
+                  children: []
+                },
+                {
+                  path: "demo5",
+                  component: () => import("@/views/vab/custom/demo/demo5.vue"),
+                  name: "Demo5",
+                  meta: { title: "5单元" },
+                  children: []
+                },
+                {
+                  path: "demo6",
+                  component: () => import("@/views/vab/custom/demo/demo6.vue"),
+                  name: "Demo6",
+                  meta: { title: "6单元" },
+                  children: []
+                },
             ],
           },
         ],

@@ -90,4 +90,12 @@ module.exports = [
       return { code: 200, msg: "success", data: data };
     },
   },
+  // {
+  //   url: "/custom/demo2/weatherList",
+  //   type: "get",
+  //   response() {
+  //     return { code: 200, msg: "success", data: weatherData };
+  //   },
+  // },
 ];
+
