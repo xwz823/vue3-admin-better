@@ -19,7 +19,6 @@
 </template>
 
 <script setup>
-import variables from "@/styles/variables.scss";
 import { computed } from "vue";
 import { useSettingsStore } from "@/stores/settings";
 import { useRoutesStore } from "@/stores/routes";

@@ -960,23 +960,30 @@ const data = [
   'yen-sign',
   'yin-yang',
 ]
-module.exports = [
+const iconResponse = (config) => {
+  const { title, pageNo = 1, pageSize = 72 } = config.body
+  let mockList = data.filter((item) => {
+    if (title && item.indexOf(title) < 0) return false
+    return true
+  })
+  const pageList = mockList.filter((item, index) => index < pageSize * pageNo && index >= pageSize * (pageNo - 1))
+  return {
+    code: 200,
+    msg: 'success',
+    totalCount: mockList.length,
+    data: pageList,
+  }
+}
+
+export default [
   {
-    url: '/icon/getList',
-    type: 'post',
-    response(config) {
-      const { title, pageNo = 1, pageSize = 72 } = config.body
-      let mockList = data.filter((item) => {
-        if (title && item.indexOf(title) < 0) return false
-        return true
-      })
-      const pageList = mockList.filter((item, index) => index < pageSize * pageNo && index >= pageSize * (pageNo - 1))
-      return {
-        code: 200,
-        msg: 'success',
-        totalCount: mockList.length,
-        data: pageList,
-      }
-    },
+    url: '/vab-mock-server/icon/getList',
+    method: 'post',
+    response: iconResponse,
+  },
+  {
+    url: '/vab-mock-server/icon/list',
+    method: 'post',
+    response: iconResponse,
   },
 ]

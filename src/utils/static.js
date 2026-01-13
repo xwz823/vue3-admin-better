@@ -6,11 +6,14 @@ import Mock from 'mockjs'
 import { paramObj } from '@/utils'
 
 const mocks = []
-// 使用兼容 rspack 的方式导入 mock 控制器
-const files = require.context('../../mock/controller', false, /\.js$/)
+// 使用 Vite 的 import.meta.glob 导入 mock 控制器
+const mockModules = import.meta.glob('../../mock/controller/*.js', { eager: true })
 
-files.keys().forEach((key) => {
-  mocks.push(...files(key))
+Object.values(mockModules).forEach((module) => {
+  const mockData = module.default || module
+  if (Array.isArray(mockData)) {
+    mocks.push(...mockData)
+  }
 })
 
 export function mockXHR() {

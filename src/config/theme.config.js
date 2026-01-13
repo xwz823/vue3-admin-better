@@ -11,4 +11,4 @@ const theme = {
   //是否显示多标签页
   tabsBar: true,
 }
-module.exports = theme
+export default theme

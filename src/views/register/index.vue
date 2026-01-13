@@ -375,7 +375,7 @@ const { form, registerRules, isGetphone, phoneCode } = toRefs(state);
 .register-image {
   width: 50%;
   position: relative;
-  background: url("~@/assets/login_images/background.jpg") center center
+  background: url("@/assets/login_images/background.jpg") center center
     no-repeat;
   background-size: cover;
 

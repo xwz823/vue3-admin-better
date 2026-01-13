@@ -59,4 +59,4 @@ const setting = {
   //是否显示终端donation打印
   donation: true,
 };
-module.exports = setting;
+export default setting;

@@ -166,8 +166,13 @@ nextTick(() => {
   window.addEventListener(
     "storage",
     (e) => {
-      if (e.key === tokenName || e.key === null) window.location.reload();
-      if (e.key === tokenName && e.value === null) window.location.reload();
+      // 只在 token 被删除时才刷新（退出登录场景）
+      // e.newValue === null 表示被删除
+      // e.oldValue !== null 表示之前有值
+      if (e.key === tokenName && e.newValue === null && e.oldValue !== null) {
+        console.log('[Storage] Token 被删除，刷新页面');
+        window.location.reload();
+      }
     },
     {
       capture: false,

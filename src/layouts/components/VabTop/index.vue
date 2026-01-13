@@ -54,7 +54,6 @@ import { useRoutesStore } from "@/stores/routes";
 import { useTabsBarStore } from "@/stores/tabsBar";
 import { useSettingsStore } from "@/stores/settings";
 import { useRoute } from "vue-router";
-import variables from "@/styles/variables.scss";
 import { Refresh } from "@element-plus/icons-vue";
 
 defineOptions({

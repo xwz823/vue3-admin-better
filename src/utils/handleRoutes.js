@@ -24,8 +24,10 @@ export function convertRouter(asyncRoutes) {
           try {
             const index = route.component.indexOf('views')
             const path = index > 0 ? route.component.slice(index) : `views/${route.component}`
+            // 使用 @vite-ignore 注释来抑制 Vite 警告
+            // Vite 无法静态分析完全动态的导入路径，但运行时可以正常工作
             route.component = () =>
-              import(`@/${path}`).catch((err) => {
+              import(/* @vite-ignore */ `@/${path}`).catch((err) => {
                 console.error(`路由组件加载失败: @/${path}`, err)
                 return import('@/views/404')
               })

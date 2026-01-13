@@ -4,11 +4,11 @@ const accessTokens = {
   test: "test-accessToken",
 };
 
-module.exports = [
+export default [
   {
-    url: "/login",
-    type: "post",
-    response(config) {
+    url: "/vab-mock-server/login",
+    method: "post",
+    response: (config) => {
       const { username } = config.body;
       const accessToken = accessTokens[username];
       if (!accessToken) {
@@ -25,9 +25,9 @@ module.exports = [
     },
   },
   {
-    url: "/register",
-    type: "post",
-    response() {
+    url: "/vab-mock-server/register",
+    method: "post",
+    response: () => {
       return {
         code: 200,
         msg: "模拟注册成功",
@@ -35,9 +35,9 @@ module.exports = [
     },
   },
   {
-    url: "/userInfo",
-    type: "post",
-    response(config) {
+    url: "/vab-mock-server/userInfo",
+    method: "post",
+    response: (config) => {
       const { accessToken } = config.body;
       let permissions = ["admin"];
       let username = "admin";
@@ -70,9 +70,9 @@ module.exports = [
     },
   },
   {
-    url: "/logout",
-    type: "post",
-    response() {
+    url: "/vab-mock-server/logout",
+    method: "post",
+    response: () => {
       return {
         code: 200,
         msg: "success",

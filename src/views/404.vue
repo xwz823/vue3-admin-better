@@ -75,10 +75,11 @@ export default {
         } else {
           this.$router.push({ path: "/" });
           // 使用 Pinia
-          const { useTabsBarStore } = require("@/stores/tabsBar");
-          const tabsBarStore = useTabsBarStore();
-          tabsBarStore.delOthersRoutes({
-            path: "/",
+          import("@/stores/tabsBar").then(({ useTabsBarStore }) => {
+            const tabsBarStore = useTabsBarStore();
+            tabsBarStore.delOthersRoutes({
+              path: "/",
+            });
           });
           clearInterval(this.timer);
         }

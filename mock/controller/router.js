@@ -178,11 +178,12 @@ const data = [
     ],
   },
 ];
-module.exports = [
+
+export default [
   {
-    url: "/menu/navigate",
-    type: "post",
-    response() {
+    url: "/vab-mock-server/menu/navigate",
+    method: "post",
+    response: () => {
       return { code: 200, msg: "success", data: data };
     },
   },

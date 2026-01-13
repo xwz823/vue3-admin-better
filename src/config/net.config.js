@@ -22,4 +22,4 @@ const network = {
   //无权限code
   noPermissionCode: 401,
 };
-module.exports = network;
+export default network;

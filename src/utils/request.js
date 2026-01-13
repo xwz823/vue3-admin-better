@@ -21,16 +21,13 @@ import { getRealApiUrl } from "@/config/mock.config";
 import { checkForceMode, mockRequestInterceptor } from "./mockInterceptor";
 
 // 在生产环境下引入mock数据
+// Vite 使用 import.meta.glob 替代 require.context
 if (process.env.NODE_ENV === "prod") {
-  const mockContext = require.context("../../mock/controller", true, /\.js$/);
-  mockContext.keys().forEach((key) => {
-    const mockModule = mockContext(key);
-    if (mockModule.default) {
-      mockModule.default;
-    } else {
-      mockModule;
-    }
-  });
+  // 使用 eager: true 立即导入所有 mock 文件
+  const mockModules = import.meta.glob('../../mock/controller/**/*.js', { eager: true })
+  Object.values(mockModules).forEach((module) => {
+    // Mock 模块已经被导入，无需额外处理
+  })
 }
 
 let loadingInstance;

@@ -50,24 +50,42 @@ const handlePath = (routePath) => {
 
 const handleLink = () => {
   const routePath = props.routeChildren.path;
-  const target = props.routeChildren.meta.target;
+  const target = props.routeChildren.meta?.target;
+  const resolvedPath = path.resolve(props.fullPath, routePath);
+
+  console.log('[菜单点击]', {
+    routePath,
+    fullPath: props.fullPath,
+    resolvedPath,
+    target,
+    isExternalRoute: isExternal(routePath),
+    isExternalFull: isExternal(props.fullPath),
+    currentPath: route.path
+  });
 
   if (target === "_blank") {
+    // 新窗口打开
     if (isExternal(routePath)) {
       window.open(routePath);
     } else if (isExternal(props.fullPath)) {
       window.open(props.fullPath);
-    } else if (route.path !== path.resolve(props.fullPath, routePath)) {
-      let routeData = router.resolve(path.resolve(props.fullPath, routePath));
+    } else if (route.path !== resolvedPath) {
+      let routeData = router.resolve(resolvedPath);
       window.open(routeData.href);
     }
   } else {
+    // 当前窗口打开
     if (isExternal(routePath)) {
+      console.log('[外部链接] 使用 window.location.href');
       window.location.href = routePath;
     } else if (isExternal(props.fullPath)) {
+      console.log('[外部链接] 使用 window.location.href (fullPath)');
       window.location.href = props.fullPath;
-    } else if (route.path !== path.resolve(props.fullPath, routePath)) {
-      router.push(path.resolve(props.fullPath, routePath));
+    } else if (route.path !== resolvedPath) {
+      console.log('[内部路由] 使用 router.push:', resolvedPath);
+      router.push(resolvedPath);
+    } else {
+      console.log('[相同路由] 不进行跳转');
     }
   }
 };

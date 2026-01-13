@@ -5,10 +5,11 @@
   "participants": [],
   "homepage": "https://vuejs-core.cn",
   "scripts": {
-    "dev": "env-cmd -f .env.development node --no-deprecation rspack.js serve",
-    "serve:rspack": "env-cmd -f .env.development node --no-deprecation rspack.js serve",
-    "build": "rimraf dist && env-cmd -f .env.production node --no-deprecation rspack.js build",
-    "clear": "rimraf node_modules&&npm install  --registry=https://registry.npmmirror.com",
+    "dev": "vite --mode development",
+    "serve": "vite --mode development",
+    "build": "vite build --mode production",
+    "preview": "vite preview",
+    "clear": "rimraf node_modules&&pnpm install --registry=https://registry.npmmirror.com",
     "update": "ncu -u --reject chalk,sass,sass-loader --registry=https://registry.npmmirror.com&&pnpm i --no-frozen-lockfile"
   },
   "repository": {
@@ -24,7 +25,6 @@
     ]
   },
   "dependencies": {
-    "env-cmd": "^10.1.0",
     "@element-plus/icons-vue": "^2.3.2",
     "axios": "^1.13.2",
     "caniuse-lite": "^1.0.30001762",
@@ -39,34 +39,32 @@
     "mitt": "^3.0.1",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
+    "pinia": "^3.0.4",
     "qs": "^6.14.1",
     "screenfull": "^6.0.2",
     "vue": "^3.5.26",
+    "vue-demi": "^0.14.10",
     "vue-echarts": "^8.0.1",
     "vue-router": "^4.6.4",
-    "vuedraggable": "^2.24.3",
-    "pinia": "^3.0.4"
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@rspack/cli": "^1.6.8",
-    "@rspack/core": "^1.6.8",
-    "@rspack/dev-server": "^1.1.4",
+    "@vitejs/plugin-vue": "^6.0.0",
     "@vue/compiler-sfc": "^3.5.26",
-    "babel-loader": "^10.0.0",
     "body-parser": "^2.2.1",
-    "chalk": "4.1.2",
     "chokidar": "^5.0.0",
-    "css-loader": "^7.1.2",
-    "html-rspack-plugin": "^6.1.4",
     "path-browserify": "^1.0.1",
     "rimraf": "^6.1.2",
+    "rollup-plugin-visualizer": "^5.12.0",
     "sass": "1.71.1",
     "sass-loader": "14.1.1",
-    "style-loader": "^4.0.0",
-    "vue-loader": "^17.4.2",
-    "vue-template-compiler": "^2.7.16"
+    "terser": "^5.36.0",
+    "unplugin-auto-import": "^0.18.0",
+    "unplugin-vue-components": "^0.27.0",
+    "vite": "^6.0.0",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-mock": "^3.0.2"
   },
   "keywords": [
     "vue",

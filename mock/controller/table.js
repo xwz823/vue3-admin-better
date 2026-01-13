@@ -1,5 +1,8 @@
-const { mock } = require('mockjs')
-const { handleRandomImage } = require('../utils')
+import { mock } from 'mockjs'
+
+const handleRandomImage = (width, height) => {
+  return `https://picsum.photos/${width}/${height}?random=${Math.random()}`
+}
 
 const List = []
 const count = 999
@@ -21,11 +24,11 @@ for (let i = 0; i < count; i++) {
   )
 }
 
-module.exports = [
+export default [
   {
-    url: '/table/getList',
-    type: 'post',
-    response(config) {
+    url: '/vab-mock-server/table/getList',
+    method: 'post',
+    response: (config) => {
       if (!config.body) {
         return {
           code: 200,
@@ -63,9 +66,9 @@ module.exports = [
     },
   },
   {
-    url: '/table/doEdit',
-    type: 'post',
-    response() {
+    url: '/vab-mock-server/table/doEdit',
+    method: 'post',
+    response: () => {
       return {
         code: 200,
         msg: '模拟保存成功',
@@ -73,9 +76,9 @@ module.exports = [
     },
   },
   {
-    url: '/table/doDelete',
-    type: 'post',
-    response() {
+    url: '/vab-mock-server/table/doDelete',
+    method: 'post',
+    response: () => {
       return {
         code: 200,
         msg: '模拟删除成功',

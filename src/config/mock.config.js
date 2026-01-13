@@ -34,22 +34,34 @@ const mockConfig = {
    * 3. 正则匹配: /\/user\/.*\/detail/ (使用正则表达式)
    */
   mockWhiteList: [
-    // 用户相关接口使用 Mock
-    '/vab-mock-server/user/login',
-    '/vab-mock-server/user/logout',
-    '/vab-mock-server/userInfo',
+    // ========== 用户相关接口 ==========
+    '/vab-mock-server/login',           // 用户登录
+    '/vab-mock-server/logout',          // 用户登出
+    '/vab-mock-server/userInfo',        // 获取用户信息
+    '/vab-mock-server/register',        // 用户注册
     
-    // 路由相关接口使用 Mock
-    '/vab-mock-server/router/getList',
+    // ========== 路由相关接口 ==========
+    '/vab-mock-server/menu/navigate',   // 获取导航菜单
     
-    // 表格数据使用 Mock
-    '/vab-mock-server/table/*',
+    // ========== 表格相关接口 ==========
+    '/vab-mock-server/table/getList',   // 获取表格列表
+    '/vab-mock-server/table/doEdit',    // 编辑表格数据
+    '/vab-mock-server/table/doDelete',  // 删除表格数据
+    '/vab-mock-server/table/*',         // 表格相关所有接口
     
-    // 树形数据使用 Mock
-    '/vab-mock-server/tree/*',
+    // ========== 树形数据接口 ==========
+    '/vab-mock-server/tree/list',       // 获取树形列表
+    '/vab-mock-server/tree/*',          // 树形数据所有接口
     
-    // 图标数据使用 Mock
-    '/vab-mock-server/icon/*',
+    // ========== 图标相关接口 ==========
+    '/vab-mock-server/icon/list',       // 获取图标列表
+    '/vab-mock-server/icon/getList',    // 获取图标列表（别名）
+    '/vab-mock-server/icon/*',          // 图标相关所有接口
+    
+    // ========== 外部 API（暂时不 Mock，保持原样） ==========
+    // 'https://api.vuejs-core.cn/getNotice',  // 公告接口（外部API）
+    // 'https://api.vuejs-core.cn/getAd',      // 广告接口（外部API）
+    // 'https://api.github.com/*',             // GitHub API（外部API）
   ],
 
   // ============ 黑名单模式配置 ============

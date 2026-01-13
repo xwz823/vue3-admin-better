@@ -43,11 +43,12 @@ const data = [
     ],
   },
 ]
-module.exports = [
+
+export default [
   {
-    url: '/tree/list',
-    type: 'post',
-    response() {
+    url: '/vab-mock-server/tree/list',
+    method: 'post',
+    response: () => {
       return { code: 200, msg: 'success', data }
     },
   },

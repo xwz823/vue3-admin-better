@@ -322,7 +322,7 @@ const { form, rules, loading, passwordType, redirect } = toRefs(state);
 .login-image {
   width: 50%;
   position: relative;
-  background: url("~@/assets/login_images/background.jpg") center center
+  background: url("@/assets/login_images/background.jpg") center center
     no-repeat;
   background-size: cover;
 
