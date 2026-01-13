@@ -3,10 +3,10 @@
  * @description router全局配置，如有必要可分文件抽离，其中asyncRoutes只有在intelligence模式下才会用到，vip文档中已提供路由的基础图标与小清新图标的配置方案，请仔细阅读
  */
 
-import { createRouter, createWebHashHistory } from "vue-router";
-import Layout from "@/layouts/index.vue";
-import EmptyLayout from "@/layouts/EmptyLayout.vue";
 import { publicPath } from "@/config";
+import EmptyLayout from "@/layouts/EmptyLayout.vue";
+import Layout from "@/layouts/index.vue";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 export const constantRoutes = [
   {
@@ -378,25 +378,6 @@ export const asyncRoutes = [
         name: "Error404",
         component: () => import("@/views/404"),
         meta: { title: "404" },
-      },
-    ],
-  },
-    {
-    path: '/donate-menu',
-    component: Layout,
-    meta: {
-      title: '支持我们',
-      icon: 'heart',
-    },
-    children: [
-      {
-        path: '/donate',
-        component: () => import('@/views/donate/index'),
-        meta: {
-          title: '支持我们',
-          icon: 'heart',
-          badge: 'Donate',
-        },
       },
     ],
   },

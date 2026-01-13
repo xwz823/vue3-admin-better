@@ -158,15 +158,17 @@ module.exports = {
       // Vue 3需要的全局常量
       __VUE_OPTIONS_API__: JSON.stringify(true),
       __VUE_PROD_DEVTOOLS__: JSON.stringify(mode !== "production"),
-      // 直接赋值方式，避免嵌套对象
-      "process.env.NODE_ENV": JSON.stringify(mode),
-      "process.env.BASE_URL": JSON.stringify(process.env.BASE_URL),
-      "process.env.VUE_APP_TITLE": JSON.stringify(process.env.VUE_APP_TITLE),
-      "process.env.VUE_APP_MOCK_ENABLE": JSON.stringify("true"), // 确保在所有环境中mock都为true
-      "process.env.VUE_APP_AUTHOR": JSON.stringify(process.env.VUE_APP_AUTHOR),
-      "process.env.VUE_APP_UPDATE_TIME": JSON.stringify(
-        process.env.VUE_APP_UPDATE_TIME
-      ),
+      // 定义 process 对象，使其在浏览器环境中可用
+      process: JSON.stringify({
+        env: {
+          NODE_ENV: mode,
+          BASE_URL: process.env.BASE_URL,
+          VUE_APP_TITLE: process.env.VUE_APP_TITLE,
+          VUE_APP_MOCK_ENABLE: "true",
+          VUE_APP_AUTHOR: process.env.VUE_APP_AUTHOR,
+          VUE_APP_UPDATE_TIME: process.env.VUE_APP_UPDATE_TIME,
+        },
+      }),
     }),
     new HtmlRspackPlugin({
       template: "./public/index.html",

@@ -3,7 +3,6 @@ import { createPinia } from "pinia"; // 导入 Pinia
 import App from "./App.vue";
 import router from "./router";
 import plugins from "./plugins";
-import { printLayoutsInfo } from "@/utils/printInfo";
 // 导入布局组件注册函数
 import { registerLayoutComponents } from "@/layouts/export";
 // 导入事件总线
@@ -49,8 +48,6 @@ if (process.env.NODE_ENV === "production") {
   mockXHR();
   console.log("生产环境已启用Mock拦截，所有接口请求将被Mock拦截");
 }
-// 打印layouts/index.js中的信息到控制台
-printLayoutsInfo();
 
 // 挂载应用
 app.mount("#vue-admin-better");

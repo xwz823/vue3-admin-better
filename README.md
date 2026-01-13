@@ -1,7 +1,7 @@
 <div align="center">
   <img width="200" src="https://assets.rspack.rs/rspack/rspack-logo.svg"/>
-  <h1>Vue3 Admin Better</h1>
-  <p>拒绝过度封装，去除等待时间，让项目回归纯粹，让开发变得简单</p>
+  <h1>Vertex</h1>
+  <!-- <p>拒绝过度封装，去除等待时间，让项目回归纯粹，让开发变得简单</p> -->
 </div>
 
 [![stars](https://img.shields.io/github/stars/zxwk1998/vue-admin-better?style=flat-square&logo=GitHub)](https://github.com/zxwk1998/vue-admin-better)

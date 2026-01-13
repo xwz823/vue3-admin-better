@@ -6,11 +6,9 @@ process.noDeprecation = true;
 const { rspack } = require("@rspack/core");
 const path = require("path");
 const fs = require("fs");
-// 引入layouts中的donationConsole函数
-const { donationConsole } = require("./layouts");
 
-// 在命令行控制台打印信息
-donationConsole();
+// 替换为简洁的项目信息打印
+console.log(`项目启动中...`);
 
 const configPath = path.resolve(__dirname, "rspack.config.js");
 const config = require(configPath);

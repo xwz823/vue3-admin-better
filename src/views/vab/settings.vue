@@ -154,8 +154,8 @@ export default {
     return {
       activeTab: "basic",
       basicForm: {
-        siteName: "Vue Admin Better",
-        description: "一个基于Vue 3和Element Plus的后台管理系统",
+        siteName: "Vertex",
+        description: "现代化管理系统",
         logo: "",
         maintenanceMode: false
       },

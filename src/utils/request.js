@@ -10,13 +10,16 @@ import {
   successCode,
   tokenName,
 } from "@/config";
-import { useUserStore } from "@/stores";
+import { useUserStore } from "@/stores/user";
 import qs from "qs";
 import router from "@/router";
 import { isArray } from "@/utils/validate";
 import { ElLoading, ElMessage } from "element-plus";
 import { pickBy, identity } from "lodash-es";
 import { mock } from "mockjs";
+// 导入 Mock 控制相关函数
+import { mockRequestInterceptor, checkForceMode } from "./mockInterceptor";
+import { getRealApiUrl } from "@/config/mock.config";
 
 // 在生产环境下引入mock数据
 if (process.env.NODE_ENV === "production") {
@@ -80,6 +83,27 @@ instance.defaults.retryDelay = retryConfig.retryDelay;
 // 请求拦截器
 instance.interceptors.request.use(
   (config) => {
+    // ===== 新增：Mock 控制逻辑 =====
+    // 1. 检查是否有强制标记
+    const forceMode = checkForceMode(config);
+    
+    if (forceMode === 'mock') {
+      // 强制使用 Mock，不做任何修改
+      // 继续使用原有的 baseURL
+    } else if (forceMode === 'real') {
+      // 强制使用真实 API
+      const realApiUrl = getRealApiUrl();
+      if (config.url.includes('/vab-mock-server/')) {
+        config.url = config.url.replace('/vab-mock-server/', '/');
+      }
+      config.baseURL = realApiUrl;
+    } else {
+      // 2. 根据配置决定使用 Mock 还是真实 API
+      config = mockRequestInterceptor(config);
+    }
+    // ===== Mock 控制逻辑结束 =====
+
+    // 3. 添加 token
     const userStore = useUserStore();
     if (userStore.accessToken) {
       config.headers[tokenName] = userStore.accessToken;
