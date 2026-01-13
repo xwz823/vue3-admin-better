@@ -1,8 +1,8 @@
-import { createApp } from "vue";
 import { createPinia } from "pinia"; // 导入 Pinia
+import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
 import plugins from "./plugins";
+import router from "./router";
 // 导入布局组件注册函数
 import { registerLayoutComponents } from "@/layouts/export";
 // 导入事件总线
@@ -43,7 +43,7 @@ window.$eventBus = eventBus;
 window.$baseTitle = title;
 
 // 检测环境变量，生产环境启用mock
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "prod") {
   // 生产环境初始化mock
   mockXHR();
   console.log("生产环境已启用Mock拦截，所有接口请求将被Mock拦截");

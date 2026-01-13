@@ -41,7 +41,7 @@ const setting = {
   //是否显示logo，不显示时设置false，显示时请填写remixIcon图标名称，暂时只支持设置remixIcon
   logo: "vuejs-fill",
   //是否显示在页面高亮错误
-  errorLog: ["development"],
+  errorLog: ["dev"],
   //是否开启登录拦截
   loginInterception: true,
   //intelligence和all两种方式，前者后端权限只控制permissions不控制view文件的import（前后端配合，减轻后端工作量），all方式完全交给后端前端只负责加载

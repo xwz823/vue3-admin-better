@@ -9,6 +9,7 @@
       name="keywords"
     />
     <meta content="<%= VUE_APP_AUTHOR %>" name="author" />
+    <link rel="icon" type="image/svg+xml" href="<%= BASE_URL %>favicon.svg" />
   </head>
   <body>
     <noscript
@@ -16,8 +17,10 @@
     >
     <div id="vue-admin-better"></div>
     <script>
-      /^http(s*):\/\//.test(location.href) ||
-        /* alert("基于vue3 admin better 开源版开发的项目需要部署到服务器下访问"); */
+      // 检查是否通过 http(s) 协议访问
+      if (!/^http(s*):\/\//.test(location.href)) {
+        console.warn('建议通过服务器访问此项目');
+      }
     </script>
     <script>
       if (window.location.hostname !== "localhost") {

@@ -5,9 +5,9 @@
   "participants": [],
   "homepage": "https://vuejs-core.cn",
   "scripts": {
-    "dev": "node --no-deprecation rspack.js serve",
-    "serve:rspack": "node --no-deprecation rspack.js serve",
-    "build": "rimraf dist && node --no-deprecation rspack.js build",
+    "dev": "env-cmd -f .env.development node --no-deprecation rspack.js serve",
+    "serve:rspack": "env-cmd -f .env.development node --no-deprecation rspack.js serve",
+    "build": "rimraf dist && env-cmd -f .env.production node --no-deprecation rspack.js build",
     "clear": "rimraf node_modules&&npm install  --registry=https://registry.npmmirror.com",
     "update": "ncu -u --reject chalk,sass,sass-loader --registry=https://registry.npmmirror.com&&pnpm i --no-frozen-lockfile"
   },
@@ -24,6 +24,7 @@
     ]
   },
   "dependencies": {
+    "env-cmd": "^10.1.0",
     "@element-plus/icons-vue": "^2.3.2",
     "axios": "^1.13.2",
     "caniuse-lite": "^1.0.30001762",

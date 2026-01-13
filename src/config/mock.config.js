@@ -76,10 +76,9 @@ const mockConfig = {
    */
   realApiConfig: {
     // 开发环境真实后端地址
-    development: process.env.VUE_APP_API_BASE_URL || 'http://localhost:3000/api',
-    //development: 'http://localhost:3000/api',
+    dev: process.env.VUE_APP_API_BASE_URL || 'http://localhost:3000/api',
     // 生产环境真实后端地址
-    production: 'https://api.yourdomain.com',
+    prod: process.env.VUE_APP_API_BASE_URL || 'https://api.yourdomain.com',
   },
 
   // ============ 调试配置 ============
@@ -163,8 +162,8 @@ export function shouldUseMock(url) {
  * @returns {string}
  */
 export function getRealApiUrl() {
-  const env = process.env.NODE_ENV || 'development';
-  return mockConfig.realApiConfig[env] || mockConfig.realApiConfig.development;
+  const env = process.env.NODE_ENV || 'dev';
+  return mockConfig.realApiConfig[env] || mockConfig.realApiConfig.dev;
 }
 
 /**

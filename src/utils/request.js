@@ -1,28 +1,27 @@
-import axios from "axios";
 import {
-  baseURL,
-  contentType,
-  debounce,
-  invalidCode,
-  loginInterception,
-  noPermissionCode,
-  requestTimeout,
-  successCode,
-  tokenName,
+    baseURL,
+    contentType,
+    debounce,
+    invalidCode,
+    loginInterception,
+    noPermissionCode,
+    requestTimeout,
+    successCode,
+    tokenName,
 } from "@/config";
-import { useUserStore } from "@/stores/user";
-import qs from "qs";
 import router from "@/router";
+import { useUserStore } from "@/stores/user";
 import { isArray } from "@/utils/validate";
+import axios from "axios";
 import { ElLoading, ElMessage } from "element-plus";
-import { pickBy, identity } from "lodash-es";
-import { mock } from "mockjs";
+import { identity, pickBy } from "lodash-es";
+import qs from "qs";
 // 导入 Mock 控制相关函数
-import { mockRequestInterceptor, checkForceMode } from "./mockInterceptor";
 import { getRealApiUrl } from "@/config/mock.config";
+import { checkForceMode, mockRequestInterceptor } from "./mockInterceptor";
 
 // 在生产环境下引入mock数据
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "prod") {
   const mockContext = require.context("../../mock/controller", true, /\.js$/);
   mockContext.keys().forEach((key) => {
     const mockModule = mockContext(key);

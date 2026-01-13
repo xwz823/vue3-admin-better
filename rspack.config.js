@@ -13,17 +13,17 @@ const dayjs = require("dayjs");
 const time = dayjs().format("YYYY-M-D HH:mm:ss");
 
 // 设置环境变量
-process.env.VUE_APP_TITLE = title || "vue-admin-better";
+process.env.VUE_APP_TITLE = title || "Vertex";
 process.env.VUE_APP_UPDATE_TIME = time;
-process.env.BASE_URL = publicPath;
-// 删除这一行，避免覆盖rspack.js中设置的值
-// process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+process.env.BASE_URL = publicPath || "/";  // 修复：提供默认值
 process.env.VUE_APP_MOCK_ENABLE = "true"; // 始终启用mock
-process.env.VUE_APP_AUTHOR = "vue-admin-better"; // 设置作者
+process.env.VUE_APP_AUTHOR = "xwz"; // 设置作者
+// 删除这一行，避免覆盖rspack.js中设置的值
+// process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 
 const resolve = (dir) => path.join(__dirname, dir);
 // 定义一个模式变量，避免冲突
-const mode = process.argv[2] === "build" ? "production" : "development";
+const mode = process.argv[2] === "build" ? "prod" : "dev";
 
 /**
  * @type {Configuration}
@@ -47,7 +47,7 @@ module.exports = {
     maxEntrypointSize: 3000000, // 3MB
     maxAssetSize: 1000000, // 1MB
     // 只在生产环境显示性能警告
-    hints: mode === "production" ? "warning" : false,
+    hints: mode === "prod" ? "warning" : false,
   },
   module: {
     rules: [
@@ -157,17 +157,24 @@ module.exports = {
     new DefinePlugin({
       // Vue 3需要的全局常量
       __VUE_OPTIONS_API__: JSON.stringify(true),
-      __VUE_PROD_DEVTOOLS__: JSON.stringify(mode !== "production"),
-      // 定义 process 对象，使其在浏览器环境中可用
-      process: JSON.stringify({
-        env: {
-          NODE_ENV: mode,
-          BASE_URL: process.env.BASE_URL,
-          VUE_APP_TITLE: process.env.VUE_APP_TITLE,
-          VUE_APP_MOCK_ENABLE: "true",
-          VUE_APP_AUTHOR: process.env.VUE_APP_AUTHOR,
-          VUE_APP_UPDATE_TIME: process.env.VUE_APP_UPDATE_TIME,
-        },
+      __VUE_PROD_DEVTOOLS__: JSON.stringify(mode !== "prod"),
+      // 定义 process.env 的各个属性（会在编译时替换）
+      "process.env.NODE_ENV": JSON.stringify(mode || "dev"),
+      "process.env.BASE_URL": JSON.stringify(process.env.BASE_URL || "/"),
+      "process.env.VUE_APP_TITLE": JSON.stringify(process.env.VUE_APP_TITLE || "Vertex"),
+      "process.env.VUE_APP_MOCK_ENABLE": JSON.stringify(process.env.VUE_APP_MOCK_ENABLE || "true"),
+      "process.env.VUE_APP_AUTHOR": JSON.stringify(process.env.VUE_APP_AUTHOR || "xwz"),
+      "process.env.VUE_APP_UPDATE_TIME": JSON.stringify(process.env.VUE_APP_UPDATE_TIME || ""),
+      "process.env.VUE_APP_API_BASE_URL": JSON.stringify(process.env.VUE_APP_API_BASE_URL || "http://localhost:3000/api"),
+      // 定义 process.env 对象（用于访问整个 env 对象的情况）
+      "process.env": JSON.stringify({
+        NODE_ENV: mode || "dev",
+        BASE_URL: process.env.BASE_URL || "/",
+        VUE_APP_TITLE: process.env.VUE_APP_TITLE || "Vertex",
+        VUE_APP_MOCK_ENABLE: process.env.VUE_APP_MOCK_ENABLE || "true",
+        VUE_APP_AUTHOR: process.env.VUE_APP_AUTHOR || "xwz",
+        VUE_APP_UPDATE_TIME: process.env.VUE_APP_UPDATE_TIME || "",
+        VUE_APP_API_BASE_URL: process.env.VUE_APP_API_BASE_URL || "http://localhost:3000/api",
       }),
     }),
     new HtmlRspackPlugin({
@@ -176,12 +183,12 @@ module.exports = {
       title: title || "vue-admin-better",
       inject: "body",
       templateParameters: {
-        BASE_URL: mode === "production" ? "./" : "/",
+        BASE_URL: mode === "prod" ? "./" : "/",
         VUE_APP_TITLE: process.env.VUE_APP_TITLE,
         VUE_APP_AUTHOR: process.env.VUE_APP_AUTHOR,
       },
       minify:
-        mode === "production"
+        mode === "prod"
           ? {
               removeComments: true,
               collapseWhitespace: true,
@@ -244,9 +251,9 @@ module.exports = {
       },
     },
     // 添加压缩配置
-    minimize: mode === "production",
+    minimize: mode === "prod",
     // 如果是生产环境，增加tree shaking
-    usedExports: mode === "production",
+    usedExports: mode === "prod",
   },
   devServer: {
     hot: true,

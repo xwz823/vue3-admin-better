@@ -12,7 +12,7 @@ console.log(`项目启动中...`);
 
 const configPath = path.resolve(__dirname, "rspack.config.js");
 const config = require(configPath);
-const mode = process.argv[2] === "build" ? "production" : "development";
+const mode = process.argv[2] === "build" ? "prod" : "dev";
 
 // 增强环境变量设置，确保所有编译阶段都使用相同的NODE_ENV值
 process.env.NODE_ENV = mode;
@@ -22,15 +22,12 @@ process.env.BABEL_ENV = mode;
 // 确保mock始终被启用，即使在生产环境
 process.env.VUE_APP_MOCK_ENABLE = "true";
 console.log("设置环境变量 NODE_ENV =", process.env.NODE_ENV);
-console.log(
-  "设置环境变量 VUE_APP_MOCK_ENABLE =",
-  process.env.VUE_APP_MOCK_ENABLE
-);
+console.log( "设置环境变量 VUE_APP_MOCK_ENABLE =", process.env.VUE_APP_MOCK_ENABLE);
 
 // 读取配置
 config.mode = mode;
 
-if (mode === "production") {
+if (mode === "prod") {
   // 生产环境配置
   console.log("正在极速打包中，预计用时3秒，请稍后...");
 
