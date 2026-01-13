@@ -10,7 +10,7 @@ import {
   successCode,
   tokenName,
 } from "@/config";
-import store from "@/store";
+import { useUserStore } from "@/stores";
 import qs from "qs";
 import router from "@/router";
 import { isArray } from "@/utils/validate";
@@ -43,7 +43,8 @@ const handleCode = (code, msg) => {
   switch (code) {
     case invalidCode:
       ElMessage.error(msg || `后端接口${code}异常`);
-      store.dispatch("user/resetAccessToken");
+      const userStore = useUserStore();
+      userStore.resetAccessToken();
       if (loginInterception) {
         location.reload();
       }
@@ -79,8 +80,9 @@ instance.defaults.retryDelay = retryConfig.retryDelay;
 // 请求拦截器
 instance.interceptors.request.use(
   (config) => {
-    if (store.state.user.accessToken) {
-      config.headers[tokenName] = store.state.user.accessToken;
+    const userStore = useUserStore();
+    if (userStore.accessToken) {
+      config.headers[tokenName] = userStore.accessToken;
     }
 
     //这里会过滤所有为空、0、false的key，如果不需要请自行注释

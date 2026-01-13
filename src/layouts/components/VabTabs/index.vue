@@ -53,7 +53,9 @@
 
 <script>
 import path from "path";
-import { mapGetters } from "vuex";
+import { mapState } from "pinia";
+import { useTabsBarStore } from "@/stores/tabsBar";
+import { useRoutesStore } from "@/stores/routes";
 import {
   ArrowDown,
   CircleClose,
@@ -99,9 +101,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      visitedRoutes: "tabsBar/visitedRoutes",
-      routes: "routes/routes",
+    ...mapState(useTabsBarStore, {
+      visitedRoutes: "visitedRoutes",
+    }),
+    ...mapState(useRoutesStore, {
+      routes: "routes",
     }),
   },
   watch: {
@@ -131,10 +135,8 @@ export default {
           view = item;
         }
       });
-      const { visitedRoutes } = await this.$store.dispatch(
-        "tabsBar/delRoute",
-        view
-      );
+      const tabsBarStore = useTabsBarStore();
+      const { visitedRoutes } = await tabsBarStore.delRoute(view);
       if (this.isActive(view)) {
         this.toLastTag(visitedRoutes, view);
       }
@@ -182,16 +184,18 @@ export default {
     },
     inittabs() {
       const affixtabs = (this.affixtabs = this.filterAffixtabs(this.routes));
+      const tabsBarStore = useTabsBarStore();
       for (const tag of affixtabs) {
         if (tag.name) {
-          this.$store.dispatch("tabsBar/addVisitedRoute", tag);
+          tabsBarStore.addVisitedRoute(tag);
         }
       }
     },
     addtabs() {
       const { name } = this.$route;
       if (name) {
-        this.$store.dispatch("tabsBar/addVisitedRoute", this.$route);
+        const tabsBarStore = useTabsBarStore();
+        tabsBarStore.addVisitedRoute(this.$route);
       }
       return false;
     },
@@ -221,31 +225,31 @@ export default {
       // this.$baseEventBus.$emit('reloadrouter-view')
     },
     async closeSelectedTag(view) {
-      const { visitedRoutes } = await this.$store.dispatch(
-        "tabsBar/delRoute",
-        view
-      );
+      const tabsBarStore = useTabsBarStore();
+      const { visitedRoutes } = await tabsBarStore.delRoute(view);
       if (this.isActive(view)) {
         this.toLastTag(visitedRoutes, view);
       }
     },
     async closeOtherstabs() {
       const view = await this.toThisTag();
-      await this.$store.dispatch("tabsBar/delOthersRoutes", view);
+      const tabsBarStore = useTabsBarStore();
+      await tabsBarStore.delOthersRoutes(view);
     },
     async closeLefttabs() {
       const view = await this.toThisTag();
-      await this.$store.dispatch("tabsBar/delLeftRoutes", view);
+      const tabsBarStore = useTabsBarStore();
+      await tabsBarStore.delLeftRoutes(view);
     },
     async closeRighttabs() {
       const view = await this.toThisTag();
-      await this.$store.dispatch("tabsBar/delRightRoutes", view);
+      const tabsBarStore = useTabsBarStore();
+      await tabsBarStore.delRightRoutes(view);
     },
     async closeAlltabs() {
       const view = await this.toThisTag();
-      const { visitedRoutes } = await this.$store.dispatch(
-        "tabsBar/delAllRoutes"
-      );
+      const tabsBarStore = useTabsBarStore();
+      const { visitedRoutes } = await tabsBarStore.delAllRoutes();
       if (this.affixtabs.some((tag) => tag.path === view.path)) {
         return;
       }

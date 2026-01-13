@@ -21,7 +21,8 @@
 <script setup>
 import variables from "@/styles/variables.scss";
 import { computed } from "vue";
-import { useStore } from "vuex";
+import { useSettingsStore } from "@/stores/settings";
+import { useRoutesStore } from "@/stores/routes";
 import { useRoute } from "vue-router";
 import { defaultOopeneds } from "@/config";
 
@@ -29,11 +30,12 @@ defineOptions({
   name: "VabSide",
 });
 
-const store = useStore();
+const settingsStore = useSettingsStore();
+const routesStore = useRoutesStore();
 const route = useRoute();
 
-const collapse = computed(() => store.getters["settings/collapse"]);
-const routes = computed(() => store.getters["routes/routes"]);
+const collapse = computed(() => settingsStore.collapse);
+const routes = computed(() => routesStore.routes);
 
 const defaultOpens = computed(() => {
   // 使用配置文件中的defaultOopeneds

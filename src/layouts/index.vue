@@ -53,20 +53,20 @@
 
 <script setup>
 import { ref, computed, onBeforeMount, onBeforeUnmount, onMounted, nextTick } from "vue";
-import { useStore } from "vuex";
+import { useSettingsStore } from "@/stores/settings";
 import { tokenName } from "@/config";
 
-const store = useStore();
+const settingsStore = useSettingsStore();
 
 const oldLayout = ref("");
 const controller = ref(new window.AbortController());
 let timeOutID = null;
 
-const layout = computed(() => store.getters["settings/layout"]);
-const tabsBar = computed(() => store.getters["settings/tabsBar"]);
-const collapse = computed(() => store.getters["settings/collapse"]);
-const header = computed(() => store.getters["settings/header"]);
-const device = computed(() => store.getters["settings/device"]);
+const layout = computed(() => settingsStore.layout);
+const tabsBar = computed(() => settingsStore.tabsBar);
+const collapse = computed(() => settingsStore.collapse);
+const header = computed(() => settingsStore.header);
+const device = computed(() => settingsStore.device);
 
 const classObj = computed(() => {
   return {
@@ -75,7 +75,7 @@ const classObj = computed(() => {
 });
 
 const handleFoldSideBar = () => {
-  store.dispatch("settings/foldSideBar");
+  settingsStore.foldSideBar();
 };
 
 const handleIsMobile = () => {
@@ -87,12 +87,12 @@ const handleResize = () => {
     const isMobile = handleIsMobile();
     if (isMobile) {
       //横向布局时如果是手机端访问那么改成纵向版
-      store.dispatch("settings/changeLayout", "vertical");
+      settingsStore.changeLayout("vertical");
     } else {
-      store.dispatch("settings/changeLayout", oldLayout.value);
+      settingsStore.changeLayout(oldLayout.value);
     }
 
-    store.dispatch("settings/toggleDevice", isMobile ? "mobile" : "desktop");
+    settingsStore.toggleDevice(isMobile ? "mobile" : "desktop");
   }
 };
 
@@ -149,17 +149,17 @@ oldLayout.value = layout.value;
 const isMobile = handleIsMobile();
 if (isMobile) {
   //横向布局时如果是手机端访问那么改成纵向版
-  store.dispatch("settings/changeLayout", "vertical");
+  settingsStore.changeLayout("vertical");
 } else {
-  store.dispatch("settings/changeLayout", oldLayout.value);
+  settingsStore.changeLayout(oldLayout.value);
 }
-store.dispatch("settings/toggleDevice", isMobile ? "mobile" : "desktop");
+settingsStore.toggleDevice(isMobile ? "mobile" : "desktop");
 if (isMobile) {
   timeOutID = setTimeout(() => {
-    store.dispatch("settings/foldSideBar");
+    settingsStore.foldSideBar();
   }, 2000);
 } else {
-  store.dispatch("settings/openSideBar");
+  settingsStore.openSideBar();
 }
 
 nextTick(() => {

@@ -89,7 +89,8 @@
 
 <script setup>
 import { computed } from "vue";
-import { useStore } from "vuex";
+import { useUserStore } from "@/stores/user";
+import { useSettingsStore } from "@/stores/settings";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessage } from "element-plus";
 import { recordRoute } from "@/config";
@@ -105,14 +106,15 @@ defineOptions({
   name: "VabAvatar",
 });
 
-const store = useStore();
+const userStore = useUserStore();
+const settingsStore = useSettingsStore();
 const router = useRouter();
 const route = useRoute();
 
 // 计算属性
-const avatar = computed(() => store.getters["user/avatar"]);
-const username = computed(() => store.getters["user/username"]);
-const layout = computed(() => store.getters["settings/layout"]);
+const avatar = computed(() => userStore.avatar);
+const username = computed(() => userStore.username);
+const layout = computed(() => settingsStore.layout);
 const isHorizontalLayout = computed(() => layout.value === "horizontal");
 
 // 方法
@@ -157,7 +159,7 @@ const settings = () => {
 };
 
 const logout = () => {
-  store.dispatch("user/logout");
+  userStore.logout();
   if (recordRoute) {
     const fullPath = route.fullPath;
     router.push(`/login?redirect=${fullPath}`);

@@ -1,9 +1,9 @@
 /**
- * @author https://github.com/zxwk1998/vue-admin-better （不想保留author可删除）
+ * @author xwz
  * @description 路由守卫，目前两种模式：all模式与intelligence模式
  */
 import router from "@/router";
-import store from "@/store";
+import { useUserStore, useRoutesStore } from "@/stores";
 import VabProgress from "nprogress";
 import "nprogress/nprogress.css";
 import getPageTitle from "@/utils/pageTitle";
@@ -25,7 +25,11 @@ VabProgress.configure({
 
 router.beforeEach(async (to, from, next) => {
   if (progressBar) VabProgress.start();
-  let hasToken = store.getters["user/accessToken"];
+  
+  const userStore = useUserStore();
+  const routesStore = useRoutesStore();
+  
+  let hasToken = userStore.accessToken;
 
   if (!loginInterception) hasToken = true;
 
@@ -34,9 +38,7 @@ router.beforeEach(async (to, from, next) => {
       next({ path: "/" });
       if (progressBar) VabProgress.done();
     } else {
-      const hasPermissions =
-        store.getters["user/permissions"] &&
-        store.getters["user/permissions"].length > 0;
+      const hasPermissions = userStore.hasPermissions;
       if (hasPermissions) {
         next();
       } else {
@@ -44,10 +46,10 @@ router.beforeEach(async (to, from, next) => {
           let permissions;
           if (!loginInterception) {
             //settings.js loginInterception为false时，创建虚拟权限
-            await store.dispatch("user/setPermissions", ["admin"]);
+            userStore.setPermissions(["admin"]);
             permissions = ["admin"];
           } else {
-            permissions = await store.dispatch("user/getUserInfo");
+            permissions = await userStore.getUserInfo();
             if (!permissions) {
               throw new Error("获取用户权限失败");
             }
@@ -55,12 +57,9 @@ router.beforeEach(async (to, from, next) => {
 
           let accessRoutes = [];
           if (authentication === "intelligence") {
-            accessRoutes = await store.dispatch(
-              "routes/setRoutes",
-              permissions
-            );
+            accessRoutes = await routesStore.setRoutes(permissions);
           } else if (authentication === "all") {
-            accessRoutes = await store.dispatch("routes/setAllRoutes");
+            accessRoutes = await routesStore.setAllRoutes();
           }
 
           // 确保accessRoutes是数组
@@ -79,7 +78,7 @@ router.beforeEach(async (to, from, next) => {
         } catch (error) {
           console.error("路由守卫错误:", error);
           ElMessage.error(error.message || "发生错误，请重新登录");
-          await store.dispatch("user/resetAccessToken");
+          userStore.resetAccessToken();
           next(`/login?redirect=${to.path}`);
           if (progressBar) VabProgress.done();
         }

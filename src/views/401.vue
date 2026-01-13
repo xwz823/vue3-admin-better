@@ -74,7 +74,10 @@ export default {
           this.jumpTime--;
         } else {
           this.$router.push({ path: "/" });
-          this.$store.dispatch("tabsBar/delOthersRoutes", {
+          // 使用 Pinia
+          const { useTabsBarStore } = require("@/stores/tabsBar");
+          const tabsBarStore = useTabsBarStore();
+          tabsBarStore.delOthersRoutes({
             path: "/",
           });
           clearInterval(this.timer);

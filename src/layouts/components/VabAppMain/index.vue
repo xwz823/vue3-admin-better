@@ -15,7 +15,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "pinia";
+import { useTabsBarStore } from "@/stores/tabsBar";
+import { useSettingsStore } from "@/stores/settings";
 import { copyright, footerCopyright, keepAliveMaxNum, title } from "@/config";
 import { CopyDocument } from "@element-plus/icons-vue";
 import eventBus from "@/utils/eventBus";
@@ -37,9 +39,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      visitedRoutes: "tabsBar/visitedRoutes",
-      device: "settings/device",
+    ...mapState(useTabsBarStore, {
+      visitedRoutes: "visitedRoutes",
+    }),
+    ...mapState(useSettingsStore, {
+      device: "device",
     }),
     cachedRoutes() {
       const cachedRoutesArr = [];
@@ -72,9 +76,7 @@ export default {
   },
   mounted() {},
   methods: {
-    ...mapActions({
-      foldSideBar: "settings/foldSideBar",
-    }),
+    ...mapActions(useSettingsStore, ["foldSideBar"]),
     // 重新加载路由视图
     reloadRouterView() {
       this.routerView = false;

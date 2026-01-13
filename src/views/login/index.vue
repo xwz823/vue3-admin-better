@@ -86,7 +86,7 @@
 <script setup>
 import { reactive, ref, toRefs, onMounted, computed, nextTick } from "vue";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
+import { useUserStore } from "@/stores";
 import { title } from "@/config";
 import { isPassword } from "@/utils/validate";
 import { ElMessage } from "element-plus";
@@ -94,7 +94,7 @@ import { Hide, View, User, Lock } from "@element-plus/icons-vue";
 
 // 创建路由实例
 const router = useRouter();
-const store = useStore();
+const userStore = useUserStore();
 
 // 响应式状态
 const state = reactive({
@@ -159,7 +159,7 @@ const handleLogin = () => {
       state.loading = true;
       try {
         // 使用命名空间调用login action
-        await store.dispatch("user/login", state.form);
+        await userStore.login(state.form);
 
         // 登录成功后，让导航守卫处理路由跳转
         // 不需要手动获取用户信息和添加路由，导航守卫会处理

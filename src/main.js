@@ -1,7 +1,7 @@
 import { createApp } from "vue";
+import { createPinia } from "pinia"; // 导入 Pinia
 import App from "./App.vue";
 import router from "./router";
-import store from "@/store"; // 导入Vuex store
 import plugins from "./plugins";
 import { printLayoutsInfo } from "@/utils/printInfo";
 // 导入布局组件注册函数
@@ -21,8 +21,9 @@ import { mockXHR } from "@/utils/static";
 // 创建应用实例
 const app = createApp(App);
 
-// 使用Vuex
-app.use(store);
+// 创建并使用 Pinia
+const pinia = createPinia();
+app.use(pinia);
 
 app.use(router);
 

@@ -24,7 +24,8 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "pinia";
+import { useSettingsStore } from "@/stores/settings";
 
 export default {
   name: "VabLogo",
@@ -34,9 +35,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      logo: "settings/logo",
-      layout: "settings/layout",
+    ...mapState(useSettingsStore, {
+      logo: "logo",
+      layout: "layout",
     }),
   },
 };

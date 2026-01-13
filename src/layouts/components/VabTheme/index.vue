@@ -153,7 +153,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "pinia";
+import { useSettingsStore } from "@/stores/settings";
 import { layout as defaultLayout } from "@/config";
 import { Brush, Picture, Grid, Setting } from "@element-plus/icons-vue";
 
@@ -177,11 +178,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      layout: "settings/layout",
-      header: "settings/header",
-      tabsBar: "settings/tabsBar",
-      themeBar: "settings/themeBar",
+    ...mapState(useSettingsStore, {
+      layout: "layout",
+      header: "header",
+      tabsBar: "tabsBar",
+      themeBar: "themeBar",
     }),
   },
   created() {
@@ -198,11 +199,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-      changeLayout: "settings/changeLayout",
-      changeHeader: "settings/changeHeader",
-      changeTabsBar: "settings/changeTabsBar",
-    }),
+    ...mapActions(useSettingsStore, [
+      "changeLayout",
+      "changeHeader",
+      "changeTabsBar",
+    ]),
     handleIsMobile() {
       return document.body.getBoundingClientRect().width - 1 < 992;
     },
