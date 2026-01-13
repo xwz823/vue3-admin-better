@@ -30,6 +30,8 @@
                 <br />
                 <span>风速：{{ content.current.wind_speed_10m }}</span>
                 <br />
+                <slot />
+                <el-button type="primary" @click="emit('click')">测试</el-button>
             </div>
         </el-col>
     </el-row>
@@ -45,7 +47,15 @@
 <script setup>
 import { getWeatherList } from '@/api/demo';
 import dayjs from 'dayjs';
-import { onMounted, ref } from 'vue';
+import { defineProps, onMounted, ref, watch } from 'vue';
+
+const param = defineProps(['name','age'])
+const emit = defineEmits(['click'])
+console.log(emit);
+
+watch(param, (newVal, oldVal) => {
+    console.log(newVal, oldVal);
+})
 const content = ref({
     current: {
         temperature: '天气预报加载中',
@@ -59,13 +69,14 @@ const navigation = ref([]);
 const footer = ref('');
 
 onMounted(() => {
+    console.log(param);
     console.log('从存储中获取页面信息');
     localStorage.getItem('carousel').split(',').forEach(item => {
-            carousel.value.push(item);
-        });
+        carousel.value.push(item);
+    });
     localStorage.getItem('navigation').split(',').forEach(item => {
-            navigation.value.push(item);
-        });
+        navigation.value.push(item);
+    });
     footer.value = localStorage.getItem('footer');
     console.log('开始请求天气预报');
     getWeatherList().then(res => {
@@ -91,6 +102,7 @@ onMounted(() => {
     min-height: 100px;
     height: 600px;
     padding: 10px;
+
     .left-item {
         height: 20px;
     }
