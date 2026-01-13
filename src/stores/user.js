@@ -3,16 +3,16 @@
  * @description 用户状态管理 - Pinia 版本
  */
 
-import { defineStore } from 'pinia'
 import { getUserInfo, login, logout } from '@/api/user'
+import { title, tokenName } from '@/config'
+import { resetRouter } from '@/router'
 import {
   getAccessToken,
   removeAccessToken,
   setAccessToken,
 } from '@/utils/accessToken'
-import { resetRouter } from '@/router'
-import { title, tokenName } from '@/config'
 import { ElMessage } from 'element-plus'
+import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -48,7 +48,10 @@ export const useUserStore = defineStore('user', {
     },
 
     async login(userInfo) {
-      const { data } = await login(userInfo)
+      const resp = await login(userInfo)
+      console.log(resp)
+      const { data } =  resp;
+
       const accessToken = data[tokenName]
       if (accessToken) {
         this.setAccessToken(accessToken)

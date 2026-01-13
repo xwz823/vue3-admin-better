@@ -88,9 +88,9 @@ const mockConfig = {
    */
   realApiConfig: {
     // 开发环境真实后端地址
-    dev: process.env.VUE_APP_API_BASE_URL || 'http://localhost:3000/api',
+    dev: process.env.VUE_APP_API_BASE_URL || 'http://localhost:8888/api',
     // 生产环境真实后端地址
-    prod: process.env.VUE_APP_API_BASE_URL || 'https://api.yourdomain.com',
+    prod: process.env.VUE_APP_API_BASE_URL || 'https://localhost:9999/api',
   },
 
   // ============ 调试配置 ============

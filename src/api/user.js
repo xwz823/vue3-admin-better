@@ -1,11 +1,11 @@
-import request from "@/utils/request";
 import { tokenName } from "@/config";
+import request from "@/utils/request";
 
 export async function login(data) {
   return request({
-    url: "/login",
+    url: "/auth/login",
     method: "post",
-    data,
+    data: JSON.stringify(data)
   });
 }
 

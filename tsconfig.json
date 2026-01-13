@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    // 编译目标
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    
+    // 允许 JS 和 TS 混用（关键配置）
+    "allowJs": true,
+    "checkJs": false,
+    
+    // 类型检查（宽松模式，避免现有代码报错）
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "skipLibCheck": true,
+    
+    // Vite 相关
+    "noEmit": true,
+    "isolatedModules": true,
+    "useDefineForClassFields": true,
+    
+    // 模块解析
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    
+    // 路径别名
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    
+    // 类型定义
+    "types": ["vite/client", "element-plus/global", "node"]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "vite.config.ts",
+    "vite.config.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "mock"
+  ]
+}

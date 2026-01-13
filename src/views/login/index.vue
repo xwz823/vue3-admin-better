@@ -100,7 +100,7 @@ const userStore = useUserStore();
 const state = reactive({
   form: {
     username: "admin",
-    password: "123456",
+    password: "admin123",
   },
   rules: {
     username: [{ required: true, trigger: "blur", message: "请输入用户名" }],
