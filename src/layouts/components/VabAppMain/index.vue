@@ -1,26 +1,26 @@
 <template>
   <div v-if="routerView" class="app-main-container">
-    <vab-github-corner />
+<!--     <vab-github-corner /> -->
     <transition mode="out-in" name="fade-transform">
       <keep-alive :include="cachedRoutes" :max="keepAliveMaxNum">
         <router-view :key="key" class="app-main-height" />
       </keep-alive>
     </transition>
-    <footer v-show="footerCopyright" class="footer-copyright">
+<!--     <footer v-show="footerCopyright" class="footer-copyright">
       Copyright
       <el-icon><CopyDocument /></el-icon>
       vue3-admin-better 开源免费版 {{ fullYear }}
-    </footer>
+    </footer> -->
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "pinia";
-import { useTabsBarStore } from "@/stores/tabsBar";
-import { useSettingsStore } from "@/stores/settings";
 import { copyright, footerCopyright, keepAliveMaxNum, title } from "@/config";
-import { CopyDocument } from "@element-plus/icons-vue";
+import { useSettingsStore } from "@/stores/settings";
+import { useTabsBarStore } from "@/stores/tabsBar";
 import eventBus from "@/utils/eventBus";
+import { CopyDocument } from "@element-plus/icons-vue";
+import { mapActions, mapState } from "pinia";
 
 export default {
   name: "VabAppMain",

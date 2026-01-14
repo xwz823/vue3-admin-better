@@ -20,7 +20,8 @@
         </div>
       </div>
       <div class="vab-main main-padding">
-        <vab-ad />
+        <!-- 暂时去掉广告位 -->
+        <!-- <vab-ad /> -->
         <vab-app-main />
       </div>
     </div>
@@ -43,7 +44,8 @@
           <vab-nav />
           <vab-tabs v-if="tabsBar === 'true' || tabsBar === true" />
         </div>
-        <vab-ad />
+        <!-- 暂时去掉广告位 -->
+        <!-- <vab-ad /> -->
         <vab-app-main />
       </div>
     </div>
@@ -52,9 +54,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeMount, onBeforeUnmount, onMounted, nextTick } from "vue";
-import { useSettingsStore } from "@/stores/settings";
 import { tokenName } from "@/config";
+import { useSettingsStore } from "@/stores/settings";
+import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref } from "vue";
 
 const settingsStore = useSettingsStore();
 

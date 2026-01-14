@@ -3,10 +3,10 @@
  * @description 路由状态管理 - Pinia 版本
  */
 
-import { defineStore } from 'pinia'
-import { asyncRoutes, constantRoutes } from '@/router'
 import { getRouterList } from '@/api/router'
+import { asyncRoutes, constantRoutes } from '@/router'
 import { convertRouter, filterAsyncRoutes } from '@/utils/handleRoutes'
+import { defineStore } from 'pinia'
 
 export const useRoutesStore = defineStore('routes', {
   state: () => ({
@@ -38,6 +38,8 @@ export const useRoutesStore = defineStore('routes', {
      */
     async setAllRoutes() {
       try {
+        const resp = await getRouterList();
+        console.log(resp);
         let { data } = await getRouterList()
         if (!data || !Array.isArray(data)) {
           console.error('后端返回的路由数据格式不正确', data)

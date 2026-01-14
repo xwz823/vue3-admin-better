@@ -1,7 +1,7 @@
 <template>
   <div class="index-container">
     <el-row :gutter="20">
-      <el-col :lg="24" :md="24" :sm="24" :xl="24" :xs="24">
+      <!-- <el-col :lg="24" :md="24" :sm="24" :xl="24" :xs="24">
         <el-alert v-if="noticeList">
           <div
             style="display: flex; align-items: center; justify-content: center"
@@ -18,8 +18,8 @@
             <p v-html="noticeList.notice"></p>
           </div>
         </el-alert>
-      </el-col>
-      <el-col
+      </el-col> -->
+      <!-- <el-col
         v-for="(item, index) in iconList"
         :key="index"
         :lg="6"
@@ -202,10 +202,7 @@
       <el-col :lg="24" :md="24" :sm="24" :xl="24" :xs="24">
         <el-card class="card" shadow="never">
           <div slot="header">
-            <span>依赖信息</span>
-            <!-- <div style="float: right">部署时间:{{ updateTime }}</div> -->
           </div>
-          <!-- rspack -->
           <div class="rspack-info">
             <div class="rspack-item">
               <div class="rspack-name">Rspack版本</div>
@@ -292,32 +289,32 @@
             </div>
           </div>
         </el-card>
-      </el-col>
+      </el-col> -->
     </el-row>
   </div>
 </template>
 
 <script>
-import VabChart from "@/plugins/echarts";
-import { dependencies, devDependencies } from "../../../package.json";
 import { getNoticeList } from "@/api/notice";
-import { random } from "lodash-es";
+import VabChart from "@/plugins/echarts";
 import {
-  View,
   ArrowUp,
-  User,
-  Clock,
-  Monitor,
   Bell,
-  Reading,
-  Present,
-  Mug,
+  Clock,
   Grid,
-  VideoPlay,
+  Monitor,
   More,
-  Promotion,
+  Mug,
   Picture,
+  Present,
+  Promotion,
+  Reading,
+  User,
+  VideoPlay,
+  View,
 } from "@element-plus/icons-vue";
+import { random } from "lodash-es";
+import { dependencies, devDependencies } from "../../../package.json";
 
 export default {
   name: "Index",

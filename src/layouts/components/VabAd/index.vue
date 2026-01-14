@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-  import { getList } from '@/api/advertisement'
+  import { getList } from '@/api/advertisement';
 
   export default {
     name: 'VabAd',

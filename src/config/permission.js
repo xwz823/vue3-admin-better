@@ -67,12 +67,12 @@ router.beforeEach(async (to, from, next) => {
             console.error("路由数据格式错误:", accessRoutes);
             accessRoutes = [];
           }
-
+          console.log(accessRoutes);
           // 添加路由
           accessRoutes.forEach((item) => {
             router.addRoute(item);
           });
-
+          console.log(router.getRoutes());
           // 确保路由添加完成后，跳转到目标页面
           next({ ...to, replace: true });
         } catch (error) {
