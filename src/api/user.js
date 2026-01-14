@@ -5,7 +5,7 @@ export async function login(data) {
   return request({
     url: "/auth/login",
     method: "post",
-    data: JSON.stringify(data)
+    data
   });
 }
 

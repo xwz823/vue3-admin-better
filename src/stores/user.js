@@ -52,7 +52,8 @@ export const useUserStore = defineStore('user', {
       console.log(resp)
       const { data } =  resp;
 
-      const accessToken = data[tokenName]
+      //const accessToken = data[tokenName]
+      const accessToken = 'Bearer ' + data.access_token
       if (accessToken) {
         this.setAccessToken(accessToken)
         const hour = new Date().getHours()

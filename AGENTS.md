@@ -359,7 +359,7 @@ export default {
 # ✅ 使用 VUE_APP_ 前缀（浏览器环境可用）
 VUE_APP_TITLE=Vertex
 VUE_APP_AUTHOR=xwz
-VUE_APP_API_BASE_URL=http://localhost:3000/api
+VITE_API_BASE_URL=http://localhost:8888
 VUE_APP_MOCK_ENABLE=true
 
 # ✅ 不使用前缀（仅 Node.js 环境可用）
@@ -372,7 +372,7 @@ NODE_ENV=dev
 ```javascript
 // src/**/*.js 或 src/**/*.vue
 const title = process.env.VUE_APP_TITLE        // "Vertex"
-const apiUrl = process.env.VUE_APP_API_BASE_URL // "http://localhost:3000/api"
+const apiUrl = process.env.VITE_API_BASE_URL // "http://localhost:3000/api"
 const env = process.env.NODE_ENV               // "dev" 或 "prod"
 ```
 
@@ -407,8 +407,8 @@ const mockConfig = {
   ],
   
   realApiConfig: {
-    dev: process.env.VUE_APP_API_BASE_URL || 'http://localhost:3000/api',
-    prod: process.env.VUE_APP_API_BASE_URL || 'https://api.yourdomain.com',
+    dev: process.env.VITE_API_BASE_URL || 'http://localhost:8888',
+    prod: process.env.VITE_API_BASE_URL || 'https://api.yourdomain.com',
   },
 }
 ```

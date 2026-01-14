@@ -34,7 +34,7 @@ declare namespace NodeJS {
     readonly VUE_APP_TITLE: string
     readonly VUE_APP_AUTHOR: string
     readonly VUE_APP_MOCK_ENABLE: string
-    readonly VUE_APP_API_BASE_URL: string
+    readonly VITE_API_BASE_URL: string
     readonly VUE_APP_UPDATE_TIME: string
   }
 }

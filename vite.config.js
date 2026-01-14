@@ -209,7 +209,7 @@ export default defineConfig(({ mode, command }) => {
       'process.env.VUE_APP_TITLE': JSON.stringify(env.VITE_APP_TITLE || 'Vertex'),
       'process.env.VUE_APP_AUTHOR': JSON.stringify(env.VITE_APP_AUTHOR || 'xwz'),
       'process.env.VUE_APP_MOCK_ENABLE': JSON.stringify(env.VITE_APP_MOCK_ENABLE || 'true'),
-      'process.env.VUE_APP_API_BASE_URL': JSON.stringify(env.VITE_APP_API_BASE_URL || ''),
+      'process.env.VITE_API_BASE_URL': JSON.stringify(env.VITE_API_BASE_URL || ''),
       'process.env.VUE_APP_UPDATE_TIME': JSON.stringify(new Date().toLocaleString()),
       'process.env': JSON.stringify({
         NODE_ENV: mode === 'development' ? 'dev' : 'prod',
@@ -217,7 +217,7 @@ export default defineConfig(({ mode, command }) => {
         VUE_APP_TITLE: env.VITE_APP_TITLE || 'Vertex',
         VUE_APP_AUTHOR: env.VITE_APP_AUTHOR || 'xwz',
         VUE_APP_MOCK_ENABLE: env.VITE_APP_MOCK_ENABLE || 'true',
-        VUE_APP_API_BASE_URL: env.VITE_APP_API_BASE_URL || '',
+        VITE_API_BASE_URL: env.VITE_API_BASE_URL || '',
         VUE_APP_UPDATE_TIME: new Date().toLocaleString(),
       }),
       __VUE_OPTIONS_API__: true,

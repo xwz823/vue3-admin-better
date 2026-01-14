@@ -84,13 +84,13 @@
 </template>
 
 <script setup>
-import { reactive, ref, toRefs, onMounted, computed, nextTick } from "vue";
-import { useRouter } from "vue-router";
-import { useUserStore } from "@/stores";
 import { title } from "@/config";
+import { useUserStore } from "@/stores";
 import { isPassword } from "@/utils/validate";
+import { Hide, Lock, User, View } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import { Hide, View, User, Lock } from "@element-plus/icons-vue";
+import { computed, nextTick, onMounted, reactive, ref, toRefs } from "vue";
+import { useRouter } from "vue-router";
 
 // 创建路由实例
 const router = useRouter();
@@ -101,6 +101,11 @@ const state = reactive({
   form: {
     username: "admin",
     password: "admin123",
+    tenantId: "000000",
+    // 临时写死，后续看如何扩展
+    clientId: 'e5cd7e4891bf95d1d19206ce24a7b32e',
+    grantType: "password",
+    rememberMe: false,
   },
   rules: {
     username: [{ required: true, trigger: "blur", message: "请输入用户名" }],
